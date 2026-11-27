@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080D19">
+
+    <meta name="theme-color" content="#000000">
 
     <title>Y3Mate - Your Audio, Your Way</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="./manifest.json">
 </head>
 
-<body>
+    <body>
 
     <header class="navbar">
         <a href="#" class="logo">
@@ -105,6 +108,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
     <script src="script.js"></script>
+        <script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js");
+    });
+}
+        </script>
 
 </body>
 </html>

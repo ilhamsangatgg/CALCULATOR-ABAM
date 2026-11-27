@@ -1,301 +1,306 @@
 
-/* ==========================================
-   Y3MATE - 4 BIT PIXEL UI
-========================================== */
+// ==========================================
+// Y3MATE - SCRIPT.JS
+// ==========================================
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-:root {
-    --black: #000000;
-    --gray: #C2C3C7;
-    --blue: #29ADFF;
-    --red: #FF004D;
-}
+// 1. YOUTUBE VIDEO PREVIEW
 
-body {
-    font-family: monospace;
-    background: var(--black);
-    color: var(--gray);
-    min-height: 100vh;
-}
+const youtubeForm = document.getElementById("youtubeForm");
+const youtubeUrl = document.getElementById("youtubeUrl");
+const videoFrame = document.getElementById("videoFrame");
 
-/* NAVBAR */
+youtubeForm.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 7%;
-    border-bottom: 3px solid var(--gray);
-}
+    const url = youtubeUrl.value.trim();
+    const videoId = getYouTubeID(url);
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--blue);
-    text-decoration: none;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.logo-y {
-    color: var(--blue);
-    font-size: 30px;
-}
-
-.menu {
-    color: var(--gray);
-    font-size: 25px;
-}
-
-/* MAIN */
-
-main {
-    width: 90%;
-    max-width: 750px;
-    margin: 55px auto;
-}
-
-/* HERO */
-
-.hero {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.subtitle {
-    color: var(--blue);
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
-
-h1 {
-    font-size: clamp(38px, 9vw, 60px);
-    line-height: 1.1;
-    margin-bottom: 18px;
-}
-
-h1 span {
-    color: var(--blue);
-}
-
-.description {
-    color: var(--gray);
-    line-height: 1.6;
-}
-
-/* CONVERTER CARDS */
-
-.converter {
-    background: var(--gray);
-    color: var(--black);
-    border: 4px solid var(--gray);
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 6px 6px 0 var(--blue);
-}
-
-.converter .subtitle {
-    color: var(--blue);
-}
-
-h2 {
-    font-size: 22px;
-    margin-bottom: 18px;
-}
-
-/* INPUT */
-
-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-input[type="url"] {
-    flex: 1;
-    min-width: 0;
-    background: var(--black);
-    border: 3px solid var(--black);
-    padding: 14px;
-    color: var(--gray);
-    outline: none;
-    font-family: monospace;
-}
-
-input:focus {
-    border-color: var(--blue);
-}
-
-/* BUTTONS */
-
-button {
-    background: var(--red);
-    color: var(--black);
-    border: 3px solid var(--black);
-    padding: 13px 20px;
-    font-family: monospace;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 4px 4px 0 var(--black);
-}
-
-button:hover:not(:disabled) {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--black);
-}
-
-button:active:not(:disabled) {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--black);
-}
-
-button:disabled {
-    background: #5F574F;
-    color: var(--gray);
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-/* VIDEO PREVIEW */
-
-.video-frame {
-    background: var(--black);
-    border: 3px dashed var(--blue);
-    min-height: 160px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    gap: 10px;
-    text-align: center;
-    padding: 15px;
-}
-
-.video-frame iframe {
-    display: block;
-    max-width: 100%;
-}
-
-.video-frame span {
-    color: var(--red);
-    font-size: 35px;
-}
-
-/* AUDIO UPLOAD */
-
-.upload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 30px 15px;
-    border: 3px dashed var(--blue);
-    background: var(--black);
-    color: var(--gray);
-    cursor: pointer;
-    text-align: center;
-}
-
-.upload span {
-    color: var(--blue);
-    font-size: 32px;
-}
-
-.upload small {
-    color: var(--gray);
-}
-
-/* FILE NAME & STATUS */
-
-#fileName,
-#status {
-    color: var(--black);
-    font-size: 13px;
-    margin: 15px 0;
-    overflow-wrap: anywhere;
-}
-
-/* OUTPUT FORMAT */
-
-#outputFormat {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    background: var(--black);
-    color: var(--gray);
-    border: 3px solid var(--black);
-    font-family: monospace;
-    outline: none;
-}
-
-#outputFormat:focus {
-    border-color: var(--blue);
-}
-
-label[for="outputFormat"] {
-    display: block;
-    margin-top: 15px;
-    color: var(--black);
-    font-size: 14px;
-}
-
-/* CONVERT BUTTON */
-
-#convertButton {
-    width: 100%;
-}
-
-/* FOOTER */
-
-footer {
-    text-align: center;
-    padding: 30px 15px;
-    border-top: 3px solid var(--gray);
-    color: var(--gray);
-    line-height: 2;
-}
-
-footer h3 {
-    color: var(--blue);
-}
-
-footer small {
-    font-size: 11px;
-}
-
-/* LINKS */
-
-a {
-    color: var(--blue);
-}
-
-/* MOBILE */
-
-@media (max-width: 480px) {
-    main {
-        margin: 40px auto;
+    if (!videoId) {
+        videoFrame.innerHTML = "<p>Invalid YouTube URL.</p>";
+        return;
     }
 
-    .converter {
-        padding: 20px;
+    videoFrame.innerHTML = `
+        <iframe
+            width="100%"
+            height="220"
+            src="https://www.youtube.com/embed/${videoId}"
+            title="YouTube video preview"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    `;
+});
+
+/**
+ * @param {string} url
+ * @returns {string | null}
+ */
+function getYouTubeID(url) {
+    try {
+        const parsedUrl = new URL(url);
+
+        if (parsedUrl.hostname === "youtu.be") {
+            return parsedUrl.pathname.slice(1) || null;
+        }
+
+        if (
+            ["www.youtube.com", "youtube.com", "m.youtube.com"]
+            .includes(parsedUrl.hostname)
+        ) {
+            if (parsedUrl.pathname === "/watch") {
+                return parsedUrl.searchParams.get("v");
+            }
+
+            const match = parsedUrl.pathname.match(
+                /^\/(?:embed|shorts)\/([^/?]+)/
+            );
+
+            return match ? match[1] : null;
+        }
+
+        return null;
+
+    } catch {
+        return null;
+    }
+}
+
+
+// 2. AUDIO FILE SELECTION
+
+const audioFile = document.getElementById("audioFile");
+const fileName = document.getElementById("fileName");
+const convertButton = document.getElementById("convertButton");
+const statusText = document.getElementById("status");
+const outputFormat = document.getElementById("outputFormat");
+
+audioFile.addEventListener("change", function() {
+    const file = audioFile.files[0];
+
+    if (!file) {
+        fileName.textContent = "No file selected";
+        convertButton.disabled = true;
+        return;
     }
 
-    form {
-        flex-direction: column;
+    fileName.textContent = file.name;
+    convertButton.disabled = false;
+    statusText.textContent = "";
+});
+
+
+// 3. AUDIO CONVERTER
+
+convertButton.addEventListener("click", async function() {
+    const file = audioFile.files[0];
+
+    if (!file) return;
+
+    let audioContext = null;
+    let downloadUrl = null;
+
+    try {
+        convertButton.disabled = true;
+        statusText.textContent = "Converting audio...";
+
+        audioContext = new (
+            window.AudioContext || window.webkitAudioContext
+        )();
+
+        const arrayBuffer = await file.arrayBuffer();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        const format = outputFormat.value;
+        let blob;
+
+        if (format === "mp3") {
+            if (!window.lamejs) {
+                throw new Error("MP3 library not loaded.");
+            }
+
+            const channels = Math.min(
+                audioBuffer.numberOfChannels, 2
+            );
+
+            const encoder = new lamejs.Mp3Encoder(
+                channels,
+                audioBuffer.sampleRate,
+                128
+            );
+
+            const left = audioBuffer.getChannelData(0);
+            const right = channels === 2
+                ? audioBuffer.getChannelData(1)
+                : null;
+
+            const leftInt = new Int16Array(left.length);
+            const rightInt = right
+                ? new Int16Array(right.length)
+                : null;
+
+            for (let i = 0; i < left.length; i++) {
+                leftInt[i] = Math.max(
+                    -32768,
+                    Math.min(32767, left[i] * 32768)
+                );
+
+                if (rightInt) {
+                    rightInt[i] = Math.max(
+                        -32768,
+                        Math.min(32767, right[i] * 32768)
+                    );
+                }
+            }
+
+            const mp3Parts = [];
+            const blockSize = 1152;
+
+            for (let i = 0; i < leftInt.length; i += blockSize) {
+                const leftChunk = leftInt.subarray(
+                    i, i + blockSize
+                );
+
+                const mp3Chunk = rightInt
+                    ? encoder.encodeBuffer(
+                        leftChunk,
+                        rightInt.subarray(i, i + blockSize)
+                    )
+                    : encoder.encodeBuffer(leftChunk);
+
+                if (mp3Chunk.length > 0) {
+                    mp3Parts.push(new Uint8Array(mp3Chunk));
+                }
+            }
+
+            const finalChunk = encoder.flush();
+
+            if (finalChunk.length > 0) {
+                mp3Parts.push(new Uint8Array(finalChunk));
+            }
+
+            blob = new Blob(mp3Parts, {
+                type: "audio/mpeg"
+            });
+
+        } else if (format === "wav") {
+            blob = audioBufferToWav(audioBuffer);
+
+        } else {
+            throw new Error("Unsupported format.");
+        }
+
+        downloadUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+
+        const dotIndex = file.name.lastIndexOf(".");
+        const baseName = dotIndex > 0
+            ? file.name.slice(0, dotIndex)
+            : file.name;
+
+        link.download = baseName + "." + format;
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        statusText.textContent = "Conversion successful!";
+
+    } catch (error) {
+        console.error(error);
+
+        statusText.textContent =
+            "Conversion failed: " + error.message;
+
+    } finally {
+        if (downloadUrl) {
+            setTimeout(() => {
+                URL.revokeObjectURL(downloadUrl);
+            }, 1000);
+        }
+
+        if (audioContext && audioContext.state !== "closed") {
+            await audioContext.close();
+        }
+
+        convertButton.disabled = false;
+    }
+});
+
+
+// 4. WAV ENCODER
+
+/**
+ * @param {AudioBuffer} buffer
+ * @returns {Blob}
+ */
+function audioBufferToWav(buffer) {
+    const channels = buffer.numberOfChannels;
+    const sampleRate = buffer.sampleRate;
+    const frames = buffer.length;
+
+    const bytesPerSample = 2;
+    const dataSize = frames * channels * bytesPerSample;
+
+    const wavBuffer = new ArrayBuffer(44 + dataSize);
+    const view = new DataView(wavBuffer);
+
+    /**
+     * @param {number} offset
+     * @param {string} string
+     */
+    function writeString(offset, string) {
+        for (let i = 0; i < string.length; i++) {
+            view.setUint8(
+                offset + i,
+                string.charCodeAt(i)
+            );
+        }
     }
 
-    form button {
-        width: 100%;
+    writeString(0, "RIFF");
+    view.setUint32(4, 36 + dataSize, true);
+    writeString(8, "WAVE");
+    writeString(12, "fmt ");
+
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, channels, true);
+    view.setUint32(24, sampleRate, true);
+
+    view.setUint32(
+        28,
+        sampleRate * channels * bytesPerSample,
+        true
+    );
+
+    view.setUint16(32, channels * bytesPerSample, true);
+    view.setUint16(34, 16, true);
+
+    writeString(36, "data");
+    view.setUint32(40, dataSize, true);
+
+    let offset = 44;
+
+    for (let i = 0; i < frames; i++) {
+        for (let channel = 0; channel < channels; channel++) {
+            let sample = buffer.getChannelData(channel)[i];
+
+            sample = Math.max(-1, Math.min(1, sample));
+
+            const value = sample < 0
+                ? sample * 32768
+                : sample * 32767;
+
+            view.setInt16(offset, value, true);
+            offset += 2;
+        }
     }
+
+    return new Blob([wavBuffer], {
+        type: "audio/wav"
+    });
 }

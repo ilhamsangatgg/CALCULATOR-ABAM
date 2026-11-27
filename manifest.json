@@ -1,0 +1,20 @@
+
+{
+  "name": "Y3Mate - Audio Tools",
+  "short_name": "Y3Mate",
+  "description": "Simple and easy audio tools.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

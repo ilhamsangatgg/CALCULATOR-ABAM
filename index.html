@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080D19">
+
+    <title>Y3Mate - Your Audio, Your Way</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-y">Y</span>
+            <span>3Mate</span>
+        </a>
+
+        <span class="menu">☰</span>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p class="subtitle">SIMPLE AUDIO TOOLS</p>
+
+            <h1>
+                Your Audio,<br>
+                <span>Your Way.</span>
+            </h1>
+
+            <p class="description">
+                Simple, fast and easy audio tools.
+            </p>
+        </section>
+
+        <section class="converter">
+            <p class="subtitle">VIDEO PREVIEW</p>
+            <h2>YouTube Preview</h2>
+
+            <form id="youtubeForm">
+                <input
+                    type="url"
+                    id="youtubeUrl"
+                    placeholder="Paste YouTube URL..."
+                    required
+                >
+
+                <button type="submit">Preview</button>
+            </form>
+
+            <div id="videoFrame" class="video-frame">
+                <span>▶</span>
+                <p>Your video preview will appear here</p>
+            </div>
+        </section>
+
+        <section class="converter">
+            <p class="subtitle">AUDIO TOOLS</p>
+            <h2>Audio Converter</h2>
+
+            <p class="description">
+                Convert your audio files easily.
+            </p>
+
+            <label for="audioFile" class="upload">
+                <span>＋</span>
+                <strong>Choose Audio File</strong>
+                <small>MP3, WAV, OGG</small>
+            </label>
+
+            <input
+                type="file"
+                id="audioFile"
+                accept="audio/*"
+                hidden
+            >
+
+            <p id="fileName">No file selected</p>
+
+<label for="outputFormat">Output Format</label>
+
+<select id="outputFormat">
+    <option value="mp3">MP3</option>
+    <option value="wav">WAV</option>
+</select>
+      
+            <button id="convertButton" disabled>
+                Convert Audio
+            </button>
+
+            <p id="status"></p>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <h3>Y3Mate</h3>
+        <p>Simple. Fast. Accurate.</p>
+        <small>© 2026 Y3Mate. All rights reserved.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
